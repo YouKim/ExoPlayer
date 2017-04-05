@@ -61,7 +61,7 @@ public class PlaylistLoader extends WrappedAsyncTaskLoader<List<Playlist>> {
      * @param context The {@link Context} to use.
      * @return The {@link Cursor} used to run the playlist query.
      */
-    public static final Cursor makePlaylistCursor(final Context context) {
+    public static Cursor makePlaylistCursor(final Context context) {
         if (MusicUtils.isPermissionGranted(context) == false) {
             return null;
         }

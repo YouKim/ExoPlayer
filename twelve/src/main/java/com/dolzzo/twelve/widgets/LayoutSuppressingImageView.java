@@ -12,6 +12,7 @@
 package com.dolzzo.twelve.widgets;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
@@ -20,7 +21,7 @@ import android.widget.ImageView;
  * requestLayout() to its parent, taking advantage of knowing that image size
  * won't change once set.
  */
-public class LayoutSuppressingImageView extends ImageView {
+public class LayoutSuppressingImageView extends AppCompatImageView {
 
     /**
      * @param context The {@link Context} to use

@@ -183,14 +183,14 @@ public class AlbumDetailFragment extends DetailFragment implements IChildFragmen
      * called back by song loader
      */
     public void update(List<Song> songs) {
-        /** compute total run time for album */
+        /* compute total run time for album */
         int duration = 0;
         for (Song s : songs) {
             duration += s.mDuration;
         }
         mAlbumDuration.setText(MusicUtils.makeLongTimeString(getActivity(), duration));
 
-        /** use the first song on the album to get a genre */
+        /* use the first song on the album to get a genre */
         if (!songs.isEmpty()) {
             GenreFetcher.fetch(getActivity(), (int) songs.get(0).mSongId, mGenre);
         }

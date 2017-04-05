@@ -114,10 +114,8 @@ public class Album {
         if (mSongNumber != other.mSongNumber) {
             return false;
         }
-        if (!TextUtils.equals(mYear, other.mYear)) {
-            return false;
-        }
-        return true;
+
+        return TextUtils.equals(mYear, other.mYear);
     }
 
     /**

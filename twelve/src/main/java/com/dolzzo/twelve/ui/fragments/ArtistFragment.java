@@ -127,7 +127,7 @@ public class ArtistFragment extends MusicBrowserFragment implements
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              final Bundle savedInstanceState) {
         // The View for the fragment's UI
-        mRootView = (ViewGroup) inflater.inflate(R.layout.list_base, null);
+        mRootView = (ViewGroup) View.inflate(getContext(), R.layout.list_base, null);
         initListView();
 
         // Register the music status listener

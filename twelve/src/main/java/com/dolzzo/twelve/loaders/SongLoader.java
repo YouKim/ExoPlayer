@@ -75,7 +75,7 @@ public class SongLoader extends SectionCreator.SimpleListLoader<Song> {
      * @param selection Additional selection statement to use
      * @return The {@link Cursor} used to run the song query.
      */
-    public static final Cursor makeSongCursor(final Context context, final String selection) {
+    public static Cursor makeSongCursor(final Context context, final String selection) {
         return makeSongCursor(context, selection, true);
     }
 
@@ -89,7 +89,7 @@ public class SongLoader extends SectionCreator.SimpleListLoader<Song> {
      *                  in false for a boost in perf
      * @return The {@link Cursor} used to run the song query.
      */
-    public static final Cursor makeSongCursor(final Context context, final String selection,
+    public static Cursor makeSongCursor(final Context context, final String selection,
                                               final boolean runSort) {
         if (MusicUtils.isPermissionGranted(context) == false) {
             return null;
@@ -102,7 +102,7 @@ public class SongLoader extends SectionCreator.SimpleListLoader<Song> {
 
         final String songSortOrder = PreferenceUtils.getInstance(context).getSongSortOrder();
 
-        Cursor cursor = context.getContentResolver().query(Audio.Media.EXTERNAL_CONTENT_URI,
+        return context.getContentResolver().query(Audio.Media.EXTERNAL_CONTENT_URI,
                 new String[]{
                         /* 0 */
                         Audio.Media._ID,
@@ -119,8 +119,6 @@ public class SongLoader extends SectionCreator.SimpleListLoader<Song> {
                         /* 6 */
                         Audio.Media.YEAR,
                 }, selectionStatement, null, songSortOrder);
-
-        return cursor;
     }
 
     /**

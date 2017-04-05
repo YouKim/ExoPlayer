@@ -37,7 +37,8 @@ public class ConfirmDialog extends DialogFragment {
     }
 
     /**
-     * @param title describes action user is confirming
+     * @param requestCode describes action user is confirming
+     * @param titleId text for title
      * @param okId  text for Ok button
      */
     public static void show(Fragment target, int requestCode, int titleId, int okId) {
@@ -74,6 +75,6 @@ public class ConfirmDialog extends DialogFragment {
     }
 
     public interface ConfirmCallback {
-        public void confirmOk(int requestCode);
+        void confirmOk(int requestCode);
     }
 }

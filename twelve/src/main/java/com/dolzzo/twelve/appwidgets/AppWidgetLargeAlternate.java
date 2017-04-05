@@ -28,6 +28,8 @@ import com.dolzzo.twelve.ui.activities.HomeActivity;
 import com.dolzzo.twelve.widgets.RepeatButton;
 import com.dolzzo.twelve.widgets.ShuffleButton;
 
+import java.lang.ref.WeakReference;
+
 /**
  * 4x2 App-Widget
  *
@@ -38,13 +40,19 @@ public class AppWidgetLargeAlternate extends AppWidgetBase {
 
     public static final String CMDAPPWIDGETUPDATE = "app_widget_large_alternate_update";
 
-    private static AppWidgetLargeAlternate mInstance;
+    private static WeakReference<AppWidgetLargeAlternate> sInstance;
 
     public static synchronized AppWidgetLargeAlternate getInstance() {
-        if (mInstance == null) {
-            mInstance = new AppWidgetLargeAlternate();
+        if (sInstance != null) {
+            AppWidgetLargeAlternate ref = sInstance.get();
+            if (ref != null) {
+                return ref;
+            }
         }
-        return mInstance;
+
+        AppWidgetLargeAlternate ref = new AppWidgetLargeAlternate();
+        sInstance = new WeakReference<AppWidgetLargeAlternate>(ref);
+        return ref;
     }
 
     /**

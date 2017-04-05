@@ -34,7 +34,7 @@ import java.util.List;
 
 /**
  * This {@link ArrayAdapter} is used to display all of the albums on a user's
- * device for {@link RecentsFragment} and {@link AlbumsFragment}.
+ * device for {@link RecentsFragment} and {@link AlbumFragment}.
  *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
@@ -74,8 +74,6 @@ public class AlbumAdapter extends BaseAdapter implements IPopupMenuCallback {
      *
      * @param context  The {@link Context} to use.
      * @param layoutId The resource Id of the view to inflate.
-     * @param style    Determines which layout to use and therefore which items to
-     *                 load.
      */
     public AlbumAdapter(final Activity context, final int layoutId) {
         mContext = context;
@@ -170,7 +168,7 @@ public class AlbumAdapter extends BaseAdapter implements IPopupMenuCallback {
      * is to cache everything before {@code #getView(int, View, ViewGroup)} is
      * called.
      */
-    public void buildCache() {
+    private void buildCache() {
         mData = new DataHolder[mAlbums.size()];
         int i = 0;
         for (Album album : mAlbums) {

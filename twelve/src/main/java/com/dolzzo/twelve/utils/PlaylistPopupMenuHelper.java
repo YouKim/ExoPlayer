@@ -90,7 +90,7 @@ public abstract class PlaylistPopupMenuHelper extends PopupMenuHelper {
      * @param playlistId   The ID of the playlist being deleted
      * @return A new {@link AlertDialog} used to delete playlists
      */
-    private final AlertDialog buildDeleteDialog(final long playlistId, final String playlistName) {
+    private AlertDialog buildDeleteDialog(final long playlistId, final String playlistName) {
         return new AlertDialog.Builder(mActivity)
                 .setTitle(mActivity.getString(R.string.delete_dialog_title, playlistName))
                 .setPositiveButton(R.string.context_menu_delete, new OnClickListener() {

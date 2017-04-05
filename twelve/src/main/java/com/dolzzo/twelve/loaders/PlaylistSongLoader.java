@@ -152,7 +152,7 @@ public class PlaylistSongLoader extends WrappedAsyncTaskLoader<List<Song>> {
      * @param playlistID The playlist the songs belong to.
      * @return The {@link Cursor} used to run the song query.
      */
-    public static final Cursor makePlaylistSongCursor(final Context context, final Long playlistID) {
+    public static Cursor makePlaylistSongCursor(final Context context, final Long playlistID) {
         String mSelection = (AudioColumns.IS_MUSIC + "=1") +
                 " AND " + AudioColumns.TITLE + " != ''";
         return context.getContentResolver().query(

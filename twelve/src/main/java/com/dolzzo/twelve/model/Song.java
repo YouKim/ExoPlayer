@@ -135,11 +135,7 @@ public class Song {
             return false;
         }
 
-        if (mYear != other.mYear) {
-            return false;
-        }
-
-        return true;
+        return (mYear == other.mYear);
     }
 
     /**

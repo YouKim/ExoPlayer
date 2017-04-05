@@ -71,8 +71,9 @@ public class RenamePlaylist extends BasePlaylistDialog {
             getDialog().dismiss();
             return;
         }
-        final String promptformat = getString(R.string.create_playlist_prompt);
-        mPrompt = String.format(promptformat, mOriginalName, mDefaultname);
+        final String promptFormat = getString(R.string.create_playlist_prompt);
+        //mPrompt = String.format(promptFormat, mOriginalName, mDefaultname);
+        mPrompt = promptFormat;
     }
 
     /**

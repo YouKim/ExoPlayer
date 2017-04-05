@@ -64,7 +64,7 @@ public class AlbumSongLoader extends WrappedAsyncTaskLoader<List<Song>> {
      * @param albumId The Id of the album the songs belong to.
      * @return The {@link Cursor} used to run the query.
      */
-    public static final Cursor makeAlbumSongCursor(final Context context, final Long albumId) {
+    public static Cursor makeAlbumSongCursor(final Context context, final Long albumId) {
         if (MusicUtils.isPermissionGranted(context) == false) {
             return null;
         }

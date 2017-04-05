@@ -54,7 +54,7 @@ public class QueueLoader extends WrappedAsyncTaskLoader<List<Song>> {
      * @param context The {@link Context} to use.
      * @return The {@link Cursor} used to run the song query.
      */
-    public static final Cursor makeQueueCursor(final Context context) {
+    public static Cursor makeQueueCursor(final Context context) {
         return new NowPlayingCursor(context);
     }
 

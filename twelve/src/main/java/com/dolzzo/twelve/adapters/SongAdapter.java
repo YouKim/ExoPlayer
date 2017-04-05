@@ -174,14 +174,10 @@ public class SongAdapter extends ArrayAdapter<Song>
      * @return true if we want to show the indicator
      */
     protected boolean showNowPlayingIndicator(final Song song, final int position) {
-        if (mCurrentlyPlayingTrack != null
+        return (mCurrentlyPlayingTrack != null
                 && mCurrentlyPlayingTrack.mSourceId == mSourceId
                 && mCurrentlyPlayingTrack.mSourceType == mSourceType
-                && mCurrentlyPlayingTrack.mId == song.mSongId) {
-            return true;
-        }
-
-        return false;
+                && mCurrentlyPlayingTrack.mId == song.mSongId);
     }
 
     /**

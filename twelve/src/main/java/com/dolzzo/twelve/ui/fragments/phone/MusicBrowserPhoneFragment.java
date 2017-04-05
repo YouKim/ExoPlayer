@@ -39,7 +39,7 @@ import com.dolzzo.twelve.widgets.ViewPagerTabs;
  * s for phones.
  *
  * @author Andrew Neal (andrewdneal@gmail.com)
- * @NOTE: The reason the sort orders are taken care of in this fragment rather
+ * NOTE: The reason the sort orders are taken care of in this fragment rather
  * than the individual fragments is to keep from showing all of the menu
  * items on tablet interfaces. That being said, I have a tablet interface
  * worked out, but I'm going to keep it in the Play Store version of

@@ -57,7 +57,7 @@ public class LastAddedLoader extends SectionCreator.SimpleListLoader<Song> {
      * @param context The {@link Context} to use.
      * @return The {@link Cursor} used to run the song query.
      */
-    public static final Cursor makeLastAddedCursor(final Context context) {
+    public static Cursor makeLastAddedCursor(final Context context) {
         // timestamp of four weeks ago
         long fourWeeksAgo = (System.currentTimeMillis() / 1000) - (4 * 3600 * 24 * 7);
         // possible saved timestamp caused by user "clearing" the last added playlist

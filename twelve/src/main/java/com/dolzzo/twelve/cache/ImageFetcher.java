@@ -31,6 +31,7 @@ import com.dolzzo.twelve.widgets.LetterTileDrawable;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.ref.WeakReference;
 
 /**
  * A subclass of {@link ImageWorker} that fetches images from a URL.
@@ -41,7 +42,7 @@ public class ImageFetcher extends ImageWorker {
 
     private static final int DEFAULT_MAX_IMAGE_WIDTH = 1024;
 
-    private static ImageFetcher sInstance = null;
+    private static WeakReference<ImageFetcher> sInstance = null;
 
     /**
      * Creates a new instance of {@link ImageFetcher}.
@@ -58,11 +59,17 @@ public class ImageFetcher extends ImageWorker {
      * @param context The {@link Context} to use
      * @return A new instance of this class.
      */
-    public static final ImageFetcher getInstance(final Context context) {
-        if (sInstance == null) {
-            sInstance = new ImageFetcher(context.getApplicationContext());
+    public static synchronized ImageFetcher getInstance(final Context context) {
+        if (sInstance != null) {
+            ImageFetcher ref = sInstance.get();
+            if (ref != null) {
+                return ref;
+            }
         }
-        return sInstance;
+
+        ImageFetcher ref = new ImageFetcher(context.getApplicationContext());
+        sInstance = new WeakReference<ImageFetcher>(ref);
+        return ref;
     }
 
     public static String getCurrentCacheKey() {
@@ -142,7 +149,7 @@ public class ImageFetcher extends ImageWorker {
      * @param reqHeight The requested height of the resulting bitmap
      * @return The value to be used for inSampleSize
      */
-    public static final int calculateInSampleSize(final BitmapFactory.Options options,
+    public static int calculateInSampleSize(final BitmapFactory.Options options,
                                                   final int reqWidth, final int reqHeight) {
         /* Raw height and width of image */
         final int height = options.outHeight;

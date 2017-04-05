@@ -119,7 +119,7 @@ public class AlbumFragment extends MusicBrowserFragment implements
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              final Bundle savedInstanceState) {
-        mRootView = (ViewGroup) inflater.inflate(R.layout.grid_base, null);
+        mRootView = (ViewGroup) View.inflate(getContext(), R.layout.grid_base, null);
         initGridView();
 
         // Register the music status listener

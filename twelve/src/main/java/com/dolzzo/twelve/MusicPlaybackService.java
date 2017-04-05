@@ -94,7 +94,6 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
 import java.io.File;
-import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -246,7 +245,7 @@ public class MusicPlaybackService extends Service {
      */
     public static final int MAX_HISTORY_SIZE = 1000;
     private static final String TAG = "MusicPlaybackService";
-    private static final boolean D = false;
+    private static final boolean D = BuildConfig.DEBUG;
     /**
      * Used by the alarm intent to shutdown the service after being idle
      */
@@ -280,6 +279,11 @@ public class MusicPlaybackService extends Service {
      * Notifies that there is a new timed text string
      */
     private static final int LYRICS = 7;
+
+    /**
+     * Notifies that next command.
+     */
+    private static final int CMD_NEXT = 1001;
     /**
      * Idle time before stopping the foreground notfication (5 minutes)
      */
@@ -651,7 +655,7 @@ public class MusicPlaybackService extends Service {
     }
 
     private void setUpMediaSession() {
-        mSession = new MediaSessionCompat(this, "Eleven");
+        mSession = new MediaSessionCompat(this, "Twelve");
         mSession.setCallback(new MediaSessionCompat.Callback() {
             @Override
             public void onPause() {
@@ -1564,7 +1568,7 @@ public class MusicPlaybackService extends Service {
         return builder.build();
     }
 
-    private final PendingIntent retrievePlaybackAction(final String action) {
+    private PendingIntent retrievePlaybackAction(final String action) {
         final ComponentName serviceName = new ComponentName(this, MusicPlaybackService.class);
         Intent intent = new Intent(action);
         intent.setComponent(serviceName);
@@ -3246,7 +3250,7 @@ public class MusicPlaybackService extends Service {
 
     }
 
-    private static final class ServiceStub extends IElevenService.Stub {
+    private static final class ServiceStub extends ITwelveService.Stub {
 
         private final WeakReference<MusicPlaybackService> mService;
 

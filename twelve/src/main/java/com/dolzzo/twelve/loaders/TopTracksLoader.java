@@ -47,7 +47,7 @@ public class TopTracksLoader extends SongLoader {
      * @param context Android context
      * @return sorted cursor
      */
-    public static final SortedCursor makeTopTracksCursor(final Context context) {
+    public static SortedCursor makeTopTracksCursor(final Context context) {
         // first get the top results ids from the internal database
         Cursor songs = SongPlayCount.getInstance(context).getTopPlayedResults(NUMBER_OF_SONGS);
 
@@ -68,7 +68,7 @@ public class TopTracksLoader extends SongLoader {
      * @param context Android context
      * @return sorted cursor
      */
-    public static final SortedCursor makeRecentTracksCursor(final Context context) {
+    public static SortedCursor makeRecentTracksCursor(final Context context) {
         // first get the top results ids from the internal database
         Cursor songs = RecentStore.getInstance(context).queryRecentIds(null);
 
@@ -91,7 +91,7 @@ public class TopTracksLoader extends SongLoader {
      * @param idColumn the id column index of the cursor
      * @return a Sorted Cursor of songs
      */
-    public static final SortedCursor makeSortedCursor(final Context context, final Cursor cursor,
+    public static SortedCursor makeSortedCursor(final Context context, final Cursor cursor,
                                                       final int idColumn) {
         if (cursor != null && cursor.moveToFirst()) {
             // create the list of ids to select against
@@ -142,7 +142,7 @@ public class TopTracksLoader extends SongLoader {
             if (missingIds != null && missingIds.size() > 0) {
                 // for each unfound id, remove it from the database
                 // this codepath should only really be hit if the user removes songs
-                // outside of the Eleven app
+                // outside of the Twelve app
                 for (long id : missingIds) {
                     if (mQueryType == QueryType.TopTracks) {
                         SongPlayCount.getInstance(mContext).removeItem(id);

@@ -33,11 +33,11 @@ public abstract class MusicBrowserFragment extends Fragment {
         return getParentFragment().getLoaderManager();
     }
 
-    protected void initLoader(Bundle args, LoaderCallbacks<? extends Object> callback) {
+    protected void initLoader(Bundle args, LoaderCallbacks<?> callback) {
         getContainingLoaderManager().initLoader(getLoaderId(), args, callback);
     }
 
-    protected void restartLoader(Bundle args, LoaderCallbacks<? extends Object> callback) {
+    protected void restartLoader(Bundle args, LoaderCallbacks<?> callback) {
         getContainingLoaderManager().restartLoader(getLoaderId(), args, callback);
     }
 }

@@ -18,12 +18,15 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
+import android.support.v4.content.ContextCompat;
 
 import com.dolzzo.twelve.R;
 import com.dolzzo.twelve.ui.fragments.AlbumFragment;
 import com.dolzzo.twelve.ui.fragments.ArtistFragment;
 import com.dolzzo.twelve.ui.fragments.SongFragment;
 import com.dolzzo.twelve.ui.fragments.phone.MusicBrowserPhoneFragment;
+
+import java.lang.ref.WeakReference;
 
 /**
  * A collection of helpers designed to get and set various preferences across
@@ -84,7 +87,7 @@ public final class PreferenceUtils {
     // show/hide album art on lockscreen
     public static final String SHOW_ALBUM_ART_ON_LOCKSCREEN = "lockscreen_album_art";
 
-    private static PreferenceUtils sInstance;
+    private static WeakReference<PreferenceUtils> sInstance;
 
     private final SharedPreferences mPreferences;
 
@@ -101,11 +104,17 @@ public final class PreferenceUtils {
      * @param context The {@link Context} to use.
      * @return A singleton of this class
      */
-    public static final PreferenceUtils getInstance(final Context context) {
-        if (sInstance == null) {
-            sInstance = new PreferenceUtils(context.getApplicationContext());
+    public static synchronized PreferenceUtils getInstance(final Context context) {
+        if (sInstance != null) {
+            PreferenceUtils ref = sInstance.get();
+            if (ref != null) {
+                return ref;
+            }
         }
-        return sInstance;
+
+        PreferenceUtils ref = new PreferenceUtils(context.getApplicationContext());
+        sInstance = new WeakReference<PreferenceUtils>(ref);
+        return ref;
     }
 
     /**
@@ -171,7 +180,7 @@ public final class PreferenceUtils {
      */
     public final int getDefaultThemeColor(final Context context) {
         return mPreferences.getInt(DEFAULT_THEME_COLOR,
-                context.getResources().getColor(R.color.blue));
+                ContextCompat.getColor(context, R.color.blue));
     }
 
     /**
@@ -324,10 +333,10 @@ public final class PreferenceUtils {
     }
 
     /**
-     * @parm lastAddedMillis timestamp in millis used as a cutoff for last added playlist
+     * @param lastAddedMillis timestamp in millis used as a cutoff for last added playlist
      */
     public void setLastAddedCutoff(long lastAddedMillis) {
-        mPreferences.edit().putLong(LAST_ADDED_CUTOFF, lastAddedMillis).commit();
+        mPreferences.edit().putLong(LAST_ADDED_CUTOFF, lastAddedMillis).apply();
     }
 
     /**

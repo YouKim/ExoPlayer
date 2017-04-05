@@ -30,7 +30,7 @@ public class PrefixHighlighter {
     private ForegroundColorSpan mPrefixColorSpan;
 
     /**
-     * @param prefixHighlightColor The color used to highlight the prefixes.
+     * @param context Context
      */
     public PrefixHighlighter(final Context context) {
         mPrefixHighlightColor = PreferenceUtils.getInstance(context).getDefaultThemeColor(context);

@@ -64,8 +64,7 @@
         <include
             layout="@layout/play_pause_progress_button"
             android:layout_width="@dimen/list_item_progress_width"
-            android:layout_height="@dimen/list_item_progress_height"
-            android:layout_centerVertical="true" />
+            android:layout_height="@dimen/list_item_progress_height" />
     </FrameLayout>
 
     <com.dolzzo.twelve.widgets.PopupMenuButton

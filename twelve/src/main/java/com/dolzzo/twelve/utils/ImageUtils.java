@@ -90,8 +90,6 @@ public class ImageUtils {
     /**
      * Downloads the bitmap from the url and returns it after some processing
      *
-     * @param key The key to identify which image to process, as provided by
-     *            {@link ImageWorker#loadImage(mKey, android.widget.ImageView)}
      * @return The processed {@link Bitmap}.
      */
     public static Bitmap processBitmap(final Context context, final String url) {
@@ -115,8 +113,6 @@ public class ImageUtils {
      * width and height.
      *
      * @param filename  The full path of the file to decode
-     * @param reqWidth  The requested width of the resulting bitmap
-     * @param reqHeight The requested height of the resulting bitmap
      * @return A {@link Bitmap} sampled down from the original with the same
      * aspect ratio and dimensions that are equal to or greater than the
      * requested width and height
@@ -154,7 +150,7 @@ public class ImageUtils {
      * @param reqHeight The requested height of the resulting bitmap
      * @return The value to be used for inSampleSize
      */
-    public static final int calculateInSampleSize(final BitmapFactory.Options options,
+    public static int calculateInSampleSize(final BitmapFactory.Options options,
                                                   final int reqWidth, final int reqHeight) {
         /* Raw height and width of image */
         final int height = options.outHeight;
@@ -195,7 +191,7 @@ public class ImageUtils {
      * @param urlString The URL to fetch
      * @return A {@link File} pointing to the fetched bitmap
      */
-    public static final File downloadBitmapToFile(final Context context, final String urlString,
+    public static File downloadBitmapToFile(final Context context, final String urlString,
                                                   final String uniqueName) {
         final File cacheDir = ImageCache.getDiskCacheDir(context, uniqueName);
 

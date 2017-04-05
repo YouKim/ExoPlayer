@@ -70,7 +70,7 @@ public final class ApolloUtils {
      * @param context The {@link Context} to use.
      * @return True if the device is a tablet, false otherwise.
      */
-    public static final boolean isTablet(final Context context) {
+    public static boolean isTablet(final Context context) {
         final int layout = context.getResources().getConfiguration().screenLayout;
         return (layout & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE;
     }
@@ -81,7 +81,7 @@ public final class ApolloUtils {
      * @param context The {@link Context} to use.
      * @return True if the device is in landscape mode, false otherwise.
      */
-    public static final boolean isLandscape(final Context context) {
+    public static boolean isLandscape(final Context context) {
         final int orientation = context.getResources().getConfiguration().orientation;
         return orientation == Configuration.ORIENTATION_LANDSCAPE;
     }
@@ -119,7 +119,7 @@ public final class ApolloUtils {
      * settings, the mobile data and other network connections aren't
      * returned at all
      */
-    public static final boolean isOnline(final Context context) {
+    public static boolean isOnline(final Context context) {
         /*
          * This sort of handles a sudden configuration change, but I think it
          * should be dealt with in a more professional way.
@@ -206,7 +206,7 @@ public final class ApolloUtils {
      *
      * @see {@literal http://en.wikipedia.org/wiki/HSV_color_space%23Lightness}
      */
-    public static final boolean isColorDark(final int color) {
+    public static boolean isColorDark(final int color) {
         return (30 * Color.red(color) + 59 * Color.green(color) + 11 * Color.blue(color)) / 100 <= BRIGHTNESS_THRESHOLD;
     }
 
@@ -236,7 +236,7 @@ public final class ApolloUtils {
      * @param activity The {@link Activity} to use.
      * @return A new {@link ImageFetcher} used to fetch images asynchronously.
      */
-    public static final ImageFetcher getImageFetcher(final Activity activity) {
+    public static ImageFetcher getImageFetcher(final Activity activity) {
         final ImageFetcher imageFetcher = ImageFetcher.getInstance(activity);
         imageFetcher.setImageCache(ImageCache.findOrCreateCache(activity));
         return imageFetcher;

@@ -66,8 +66,9 @@ public class CreateNewPlaylist extends BasePlaylistDialog {
             getDialog().dismiss();
             return;
         }
-        final String prromptformat = getString(R.string.create_playlist_prompt);
-        mPrompt = String.format(prromptformat, mDefaultname);
+        final String promptFormat = getString(R.string.create_playlist_prompt);
+        //mPrompt = String.format(promptFormat, mDefaultname);
+        mPrompt = promptFormat;
     }
 
     @Override

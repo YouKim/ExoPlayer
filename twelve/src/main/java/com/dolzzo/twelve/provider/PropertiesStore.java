@@ -21,19 +21,27 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.lang.ref.WeakReference;
+
 public class PropertiesStore {
-    private static PropertiesStore sInstance = null;
+    private static WeakReference<PropertiesStore> sInstance = null;
     private final MusicDB mMusicDatabase;
 
     private PropertiesStore(final Context context) {
         mMusicDatabase = MusicDB.getInstance(context);
     }
 
-    public static final synchronized PropertiesStore getInstance(final Context context) {
-        if (sInstance == null) {
-            sInstance = new PropertiesStore(context.getApplicationContext());
+    public static synchronized PropertiesStore getInstance(final Context context) {
+        if (sInstance != null) {
+            PropertiesStore ref = sInstance.get();
+            if (ref != null) {
+                return ref;
+            }
         }
-        return sInstance;
+
+        PropertiesStore ref = new PropertiesStore(context.getApplicationContext());
+        sInstance = new WeakReference<PropertiesStore>(ref);
+        return ref;
     }
 
     public void onCreate(final SQLiteDatabase db) {

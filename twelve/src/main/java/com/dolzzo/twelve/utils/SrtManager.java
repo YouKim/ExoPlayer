@@ -15,13 +15,11 @@
 */
 package com.dolzzo.twelve.utils;
 
-import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
 import android.util.Log;
 
-import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 
 import java.io.File;

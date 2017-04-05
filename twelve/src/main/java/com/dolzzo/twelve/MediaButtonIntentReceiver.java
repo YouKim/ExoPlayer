@@ -33,7 +33,7 @@ import com.dolzzo.twelve.ui.activities.HomeActivity;
  */
 public class MediaButtonIntentReceiver extends WakefulBroadcastReceiver {
     private static final boolean DEBUG = false;
-    private static final String TAG = "MediaButtonIntentReceiver";
+    private static final String TAG = "MBIR";
 
     private static final int MSG_LONGPRESS_TIMEOUT = 1;
     private static final int MSG_HEADSET_DOUBLE_CLICK_TIMEOUT = 2;
@@ -109,7 +109,7 @@ public class MediaButtonIntentReceiver extends WakefulBroadcastReceiver {
         if (mWakeLock == null) {
             Context appContext = context.getApplicationContext();
             PowerManager pm = (PowerManager) appContext.getSystemService(Context.POWER_SERVICE);
-            mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "Eleven headset button");
+            mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "Twelve headset button");
             mWakeLock.setReferenceCounted(false);
         }
         if (DEBUG) Log.v(TAG, "Acquiring wake lock and sending " + msg.what);

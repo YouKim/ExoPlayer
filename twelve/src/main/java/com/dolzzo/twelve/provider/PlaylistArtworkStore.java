@@ -22,6 +22,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.dolzzo.twelve.utils.MusicUtils;
 
+import java.lang.ref.WeakReference;
+
 /**
  * This db stores the details to generate the playlist artwork including when it was
  * last updated and the # of songs in the playlist when it last updated
@@ -29,7 +31,7 @@ import com.dolzzo.twelve.utils.MusicUtils;
 public class PlaylistArtworkStore {
     private static final long ONE_DAY_IN_MS = 1000 * 60 * 60 * 24;
 
-    private static PlaylistArtworkStore sInstance = null;
+    private static WeakReference<PlaylistArtworkStore> sInstance = null;
     private final Context mContext;
     private MusicDB mMusicDatabase = null;
 
@@ -48,18 +50,24 @@ public class PlaylistArtworkStore {
      * @param context The {@link android.content.Context} to use
      * @return A new instance of this class.
      */
-    public static final synchronized PlaylistArtworkStore getInstance(final Context context) {
-        if (sInstance == null) {
-            sInstance = new PlaylistArtworkStore(context.getApplicationContext());
+    public static synchronized PlaylistArtworkStore getInstance(final Context context) {
+        if (sInstance != null) {
+            PlaylistArtworkStore ref = sInstance.get();
+            if (ref != null) {
+                return ref;
+            }
         }
-        return sInstance;
+
+        PlaylistArtworkStore ref = new PlaylistArtworkStore(context.getApplicationContext());
+        sInstance = new WeakReference<PlaylistArtworkStore>(ref);
+        return ref;
     }
 
     /**
      * @param playlistId playlist identifier
      * @return the key used for the imagae cache for the cover art
      */
-    public static final String getCoverCacheKey(final long playlistId) {
+    public static String getCoverCacheKey(final long playlistId) {
         return "playlist_cover_" + playlistId;
     }
 
@@ -67,7 +75,7 @@ public class PlaylistArtworkStore {
      * @param playlistId playlist identifier
      * @return the key used for the imagae cache for the top artist image
      */
-    public static final String getArtistCacheKey(final long playlistId) {
+    public static String getArtistCacheKey(final long playlistId) {
         return "playlist_artist_" + playlistId;
     }
 

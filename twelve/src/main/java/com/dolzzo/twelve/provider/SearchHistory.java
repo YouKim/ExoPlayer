@@ -20,13 +20,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 public class SearchHistory {
     /* Maximum # of items in the db */
     private static final int MAX_ITEMS_IN_DB = 25;
 
-    private static SearchHistory sInstance = null;
+    private static WeakReference<SearchHistory> sInstance = null;
 
     private MusicDB mMusicDatabase = null;
 
@@ -38,11 +39,17 @@ public class SearchHistory {
      * @param context The {@link android.content.Context} to use
      * @return A new instance of this class.
      */
-    public static final synchronized SearchHistory getInstance(final Context context) {
-        if (sInstance == null) {
-            sInstance = new SearchHistory(context.getApplicationContext());
+    public static synchronized SearchHistory getInstance(final Context context) {
+        if (sInstance != null) {
+            SearchHistory ref = sInstance.get();
+            if (ref != null) {
+                return ref;
+            }
         }
-        return sInstance;
+
+        SearchHistory ref = new SearchHistory(context.getApplicationContext());
+        sInstance = new WeakReference<SearchHistory>(ref);
+        return ref;
     }
 
     public void onCreate(final SQLiteDatabase db) {

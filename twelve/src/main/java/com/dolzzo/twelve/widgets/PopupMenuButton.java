@@ -18,13 +18,14 @@ package com.dolzzo.twelve.widgets;
 
 import android.content.Context;
 import android.os.Build;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.dolzzo.twelve.R;
 
-public class PopupMenuButton extends ImageView implements IPopupMenuCallback,
+public class PopupMenuButton extends AppCompatImageView implements IPopupMenuCallback,
         View.OnClickListener {
     protected int mPosition = -1;
     protected IListener mClickListener = null;
@@ -32,7 +33,7 @@ public class PopupMenuButton extends ImageView implements IPopupMenuCallback,
     public PopupMenuButton(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        setScaleType(ScaleType.CENTER_INSIDE);
+        setScaleType(ImageView.ScaleType.CENTER_INSIDE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             setBackground(getResources().getDrawable(R.drawable.selectable_background_light));
         } else {

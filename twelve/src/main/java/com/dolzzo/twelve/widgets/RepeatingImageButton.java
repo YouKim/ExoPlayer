@@ -14,23 +14,23 @@ package com.dolzzo.twelve.widgets;
 import android.content.Context;
 import android.os.Build;
 import android.os.SystemClock;
+import android.support.v7.widget.AppCompatImageButton;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageButton;
 
 import com.dolzzo.twelve.R;
 import com.dolzzo.twelve.utils.ApolloUtils;
 import com.dolzzo.twelve.utils.MusicUtils;
 
 /**
- * A {@link ImageButton} that will repeatedly call a 'listener' method as long
+ * A {@link AppCompatImageButton} that will repeatedly call a 'listener' method as long
  * as the button is pressed, otherwise functions like a typecal
- * {@link ImageButton}
+ * {@link AppCompatImageButton}
  */
-public class RepeatingImageButton extends ImageButton implements OnClickListener {
+public class RepeatingImageButton extends AppCompatImageButton implements OnClickListener {
 
     private static final long sInterval = 400;
 
@@ -89,7 +89,6 @@ public class RepeatingImageButton extends ImageButton implements OnClickListener
      * interval in milliseconds with which it will be called.
      *
      * @param l        The listener that will be called
-     * @param interval The interval in milliseconds for calls
      */
     public void setRepeatListener(final RepeatListener l) {
         mListener = l;

@@ -24,7 +24,7 @@ import com.dolzzo.twelve.Config;
 import java.util.Comparator;
 
 public class SearchResult {
-    public static final Comparator COMPARATOR = new Comparator<SearchResult>() {
+    public static final Comparator<SearchResult> COMPARATOR = new Comparator<SearchResult>() {
         @Override
         public int compare(final SearchResult lhs, final SearchResult rhs) {
             return lhs.mType.ordinal() - rhs.mType.ordinal();
@@ -93,7 +93,7 @@ public class SearchResult {
         return result;
     }
 
-    public static enum ResultType {
+    public enum ResultType {
         Song,
         Artist,
         Album,

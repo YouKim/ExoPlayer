@@ -2,7 +2,7 @@ package com.dolzzo.twelve;
 
 import com.dolzzo.twelve.service.MusicPlaybackTrack;
 
-interface IElevenService
+interface ITwelveService
 {
     void openFile(String path);
     void open(in long [] list, int position, long sourceId, int sourceType);

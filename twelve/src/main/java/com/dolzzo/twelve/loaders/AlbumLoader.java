@@ -74,7 +74,7 @@ public class AlbumLoader extends SectionCreator.SimpleListLoader<Album> {
      * @param artistId The artistId we want to find albums for or null if we want all albums
      * @return The {@link Cursor} used to run the album query.
      */
-    public static final Cursor makeAlbumCursor(final Context context, final Long artistId) {
+    public static Cursor makeAlbumCursor(final Context context, final Long artistId) {
         if (MusicUtils.isPermissionGranted(context) == false) {
             return null;
         }
@@ -85,7 +85,7 @@ public class AlbumLoader extends SectionCreator.SimpleListLoader<Album> {
             uri = MediaStore.Audio.Artists.Albums.getContentUri("external", artistId);
         }
 
-        Cursor cursor = context.getContentResolver().query(uri,
+        return context.getContentResolver().query(uri,
                 new String[]{
                         /* 0 */
                         BaseColumns._ID,
@@ -98,8 +98,6 @@ public class AlbumLoader extends SectionCreator.SimpleListLoader<Album> {
                         /* 4 */
                         AlbumColumns.FIRST_YEAR
                 }, null, null, albumSortOrder);
-
-        return cursor;
     }
 
     /**

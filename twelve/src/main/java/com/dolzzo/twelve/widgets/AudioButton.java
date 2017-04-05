@@ -2,17 +2,17 @@ package com.dolzzo.twelve.widgets;
 
 import android.content.Context;
 import android.os.Build;
+import android.support.v7.widget.AppCompatImageButton;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
-import android.widget.ImageButton;
 
 import com.dolzzo.twelve.R;
 import com.dolzzo.twelve.utils.ApolloUtils;
 
-public abstract class AudioButton extends ImageButton implements OnClickListener, OnLongClickListener {
+public abstract class AudioButton extends AppCompatImageButton implements OnClickListener, OnLongClickListener {
     public static float ACTIVE_ALPHA = 1.0f;
     public static float INACTIVE_ALPHA = 0.4f;
 

@@ -389,7 +389,7 @@ public abstract class PopupMenuHelper implements PopupMenu.OnMenuItemClickListen
     }
 
     // the different types of pop up menus
-    public static enum PopupMenuType {
+    public enum PopupMenuType {
         Artist,
         Album,
         Song,

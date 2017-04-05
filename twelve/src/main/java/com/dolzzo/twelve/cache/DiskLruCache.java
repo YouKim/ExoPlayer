@@ -930,7 +930,7 @@ public final class DiskLruCache implements Closeable {
             lengths = new long[valueCount];
         }
 
-        public String getLengths() throws IOException {
+        public String getLengths() {
             final StringBuilder result = new StringBuilder();
             for (final long size : lengths) {
                 result.append(' ').append(size);

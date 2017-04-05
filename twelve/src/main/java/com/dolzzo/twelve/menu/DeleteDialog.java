@@ -108,6 +108,6 @@ public class DeleteDialog extends DialogFragment {
     }
 
     public interface DeleteDialogCallback {
-        public void onDelete(long[] id);
+        void onDelete(long[] id);
     }
 }

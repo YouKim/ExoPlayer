@@ -59,7 +59,7 @@ public class SearchLoader extends WrappedAsyncTaskLoader<List<Song>> {
      * @param query The user's query.
      * @return The {@link Cursor} used to perform the search.
      */
-    public static final Cursor makeSearchCursor(final Context context, final String query) {
+    public static Cursor makeSearchCursor(final Context context, final String query) {
         return context.getContentResolver().query(
                 Uri.parse("content://media/external/audio/search/fancy/" + Uri.encode(query)),
                 new String[]{

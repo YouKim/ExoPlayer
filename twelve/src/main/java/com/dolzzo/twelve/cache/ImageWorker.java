@@ -227,7 +227,7 @@ public abstract class ImageWorker {
      *
      * @param image ImageView/BlurScrimImage to check
      */
-    public static final void cancelWork(final View image) {
+    public static void cancelWork(final View image) {
         Object tag = image.getTag();
         if (tag != null && tag instanceof AsyncTaskContainer) {
             AsyncTaskContainer asyncTaskContainer = (AsyncTaskContainer) tag;
@@ -245,7 +245,7 @@ public abstract class ImageWorker {
      * Returns false if the existing async task is loading the same key value
      * Returns true otherwise and also cancels the async task if one exists
      */
-    public static final boolean executePotentialWork(final String key, final View view) {
+    public static boolean executePotentialWork(final String key, final View view) {
         final AsyncTaskContainer asyncTaskContainer = getAsyncTaskContainer(view);
         if (asyncTaskContainer != null) {
             // we are trying to reload the same image, return false to indicate no work is needed
@@ -268,7 +268,7 @@ public abstract class ImageWorker {
      * @return Retrieve the AsyncTaskContainer assigned to the {@link View}. null if there is no
      * such task.
      */
-    public static final AsyncTaskContainer getAsyncTaskContainer(final View view) {
+    public static AsyncTaskContainer getAsyncTaskContainer(final View view) {
         if (view != null) {
             if (view.getTag() instanceof AsyncTaskContainer) {
                 return (AsyncTaskContainer) view.getTag();
@@ -287,7 +287,7 @@ public abstract class ImageWorker {
      * @return Retrieve the currently active work task (if any) associated with
      * this {@link View}. null if there is no such task.
      */
-    public static final BitmapWorkerTask getBitmapWorkerTask(final View view) {
+    public static BitmapWorkerTask getBitmapWorkerTask(final View view) {
         AsyncTaskContainer asyncTask = getAsyncTaskContainer(view);
         if (asyncTask != null) {
             return asyncTask.getBitmapWorkerTask();

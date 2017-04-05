@@ -24,6 +24,7 @@ import com.dolzzo.twelve.Config;
 import com.dolzzo.twelve.service.MusicPlaybackTrack;
 import com.dolzzo.twelve.utils.Lists;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -32,7 +33,7 @@ import java.util.LinkedList;
  * This keeps track of the music playback and history state of the playback service
  */
 public class MusicPlaybackState {
-    private static MusicPlaybackState sInstance = null;
+    private static WeakReference<MusicPlaybackState> sInstance = null;
 
     private MusicDB mMusicDatabase = null;
 
@@ -49,11 +50,17 @@ public class MusicPlaybackState {
      * @param context The {@link android.content.Context} to use
      * @return A new instance of this class.
      */
-    public static final synchronized MusicPlaybackState getInstance(final Context context) {
-        if (sInstance == null) {
-            sInstance = new MusicPlaybackState(context.getApplicationContext());
+    public static synchronized MusicPlaybackState getInstance(final Context context) {
+        if (sInstance != null) {
+            MusicPlaybackState ref = sInstance.get();
+            if (ref != null) {
+                return ref;
+            }
         }
-        return sInstance;
+
+        MusicPlaybackState ref = new MusicPlaybackState(context.getApplicationContext());
+        sInstance = new WeakReference<MusicPlaybackState>(ref);
+        return ref;
     }
 
     public void onCreate(final SQLiteDatabase db) {

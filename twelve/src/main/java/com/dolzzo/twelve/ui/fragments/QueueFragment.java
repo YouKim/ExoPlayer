@@ -24,6 +24,7 @@ import android.os.IBinder;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -214,7 +215,7 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              final Bundle savedInstanceState) {
         // The View for the fragment's UI
-        mRootView = (ViewGroup) inflater.inflate(R.layout.list_base, null);
+        mRootView = (ViewGroup) View.inflate(getContext(), R.layout.list_base, null);
         // Initialize the list
         mListView = (DragSortListView) mRootView.findViewById(R.id.list_base);
         // Set the data behind the list
@@ -442,7 +443,7 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
     }
 
     private void setupNoResultsContainer(NoResultsContainer empty) {
-        int color = getResources().getColor(R.color.no_results_light);
+        int color =  ContextCompat.getColor(getContext(), R.color.no_results_light);
         empty.setTextColor(color);
         empty.setMainText(R.string.empty_queue_main);
         empty.setSecondaryText(R.string.empty_queue_secondary);

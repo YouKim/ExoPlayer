@@ -46,7 +46,7 @@ public class SortedCursor extends AbstractCursor {
      * @param columnName the column name of the id to look up in the internal cursor
      */
     public SortedCursor(final Cursor cursor, final long[] order, final String columnName,
-                        final List<? extends Object> extraData) {
+                        final List<?> extraData) {
         if (cursor == null) {
             throw new IllegalArgumentException("Non-null cursor is needed");
         }
@@ -64,7 +64,7 @@ public class SortedCursor extends AbstractCursor {
      * @return returns the ids that aren't found in the underlying cursor
      */
     private ArrayList<Long> buildCursorPositionMapping(final long[] order,
-                                                       final String columnName, final List<? extends Object> extraData) {
+                                                       final String columnName, final List<?> extraData) {
         ArrayList<Long> missingIds = new ArrayList<Long>();
 
         mOrderedPositions = new ArrayList<Integer>(mCursor.getCount());

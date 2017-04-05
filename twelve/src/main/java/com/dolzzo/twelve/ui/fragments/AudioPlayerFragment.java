@@ -30,6 +30,7 @@ import android.os.IBinder;
 import android.os.Message;
 import android.os.PowerManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.text.Html;
 import android.text.Spanned;
@@ -187,7 +188,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              final Bundle savedInstanceState) {
         // The View for the fragment's UI
-        mRootView = (ViewGroup) inflater.inflate(R.layout.activity_player_fragment, null);
+        mRootView = (ViewGroup) View.inflate(getContext(), R.layout.activity_player_fragment, null);
 
         // Header title values
         initHeaderBar();
@@ -239,7 +240,8 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
         // Listen for lyrics text for the audio track
         filter.addAction(MusicPlaybackService.NEW_LYRICS);
         // Listen for power save mode changed
-        filter.addAction(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED);
+        filter.addAction("android.os.action.POWER_SAVE_MODE_CHANGED");
+       // filter.addAction(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED); Require API 21
         // Register the intent filters
         getActivity().registerReceiver(mPlaybackStatus, filter);
         // Refresh the current time
@@ -407,7 +409,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
     }
 
     private void setupNoResultsContainer(NoResultsContainer empty) {
-        int color = getResources().getColor(R.color.no_results_light);
+        int color = ContextCompat.getColor(getContext(), R.color.no_results_light);
         empty.setTextColor(color);
         empty.setMainText(R.string.empty_queue_main);
         empty.setSecondaryText(R.string.empty_queue_secondary);
@@ -826,7 +828,8 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
                 audioPlayerFragment.createAndSetAdapter();
             } else if (action.equals(MusicPlaybackService.NEW_LYRICS)) {
                 audioPlayerFragment.onLyrics(intent.getStringExtra("lyrics"));
-            } else if (action.equals(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED)) {
+            } else if (action.equals("android.os.action.POWER_SAVE_MODE_CHANGED")) {
+            //} else if (action.equals(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED)) { API21
                 audioPlayerFragment.updateVisualizerPowerSaveMode();
             }
         }

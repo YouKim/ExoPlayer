@@ -28,7 +28,7 @@ import java.util.logging.Logger;
  *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class ElevenApplication extends Application {
+public class TwelveApplication extends Application {
     private static final boolean DEBUG = false;
 
     /**
@@ -36,6 +36,7 @@ public class ElevenApplication extends Application {
      */
     @Override
     public void onCreate() {
+        super.onCreate();
         // Enable strict mode logging
         enableStrictMode();
         // Turn off logging for jaudiotagger.

@@ -109,9 +109,8 @@ public class PagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(final int position) {
         final Holder mCurrentHolder = mHolderList.get(position);
-        final Fragment mFragment = Fragment.instantiate(mContext,
+        return  Fragment.instantiate(mContext,
                 mCurrentHolder.mClassName, mCurrentHolder.mParams);
-        return mFragment;
     }
 
     /**
@@ -189,14 +188,14 @@ public class PagerAdapter extends FragmentPagerAdapter {
          *
          * @param fragmentClass The fragment class
          */
-        private MusicFragments(final Class<? extends Fragment> fragmentClass) {
+        MusicFragments(final Class<? extends Fragment> fragmentClass) {
             mFragmentClass = fragmentClass;
         }
 
         /**
          * Method that returns the fragment class.
          *
-         * @return Class<? extends Fragment> The fragment class.
+         * @return Class&lt;? extends Fragment&gt; The fragment class.
          */
         public Class<? extends Fragment> getFragmentClass() {
             return mFragmentClass;

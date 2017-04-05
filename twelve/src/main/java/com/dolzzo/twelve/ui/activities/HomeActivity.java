@@ -15,22 +15,20 @@
  */
 package com.dolzzo.twelve.ui.activities;
 
-import android.Manifest;
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
@@ -214,7 +212,7 @@ public class HomeActivity extends SlidingPanelActivity implements
 
     private void updateVisualizerColor(int color) {
         if (color == Color.TRANSPARENT) {
-            color = getResources().getColor(R.color.visualizer_fill_color);
+            color = ContextCompat.getColor(this, R.color.visualizer_fill_color);
         }
 
         // check for null since updatestatusBarColor is a async task
@@ -227,7 +225,7 @@ public class HomeActivity extends SlidingPanelActivity implements
     private void updateStatusBarColor(int color) {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             if (color == Color.TRANSPARENT) {
-                color = getResources().getColor(R.color.primary_dark);
+                color = ContextCompat.getColor(this, R.color.primary_dark);
             }
             final Window window = getWindow();
             ObjectAnimator animator = ObjectAnimator.ofInt(window,
@@ -450,6 +448,7 @@ public class HomeActivity extends SlidingPanelActivity implements
                     id = Long.parseLong(idString);
                 } catch (NumberFormatException e) {
                     Log.e(TAG, e.getMessage());
+                    return defaultId;
                 }
             }
         }

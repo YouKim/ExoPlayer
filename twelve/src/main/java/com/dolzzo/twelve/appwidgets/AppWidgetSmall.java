@@ -28,6 +28,8 @@ import com.dolzzo.twelve.MusicPlaybackService;
 import com.dolzzo.twelve.R;
 import com.dolzzo.twelve.ui.activities.HomeActivity;
 
+import java.lang.ref.WeakReference;
+
 /**
  * 4x1 App-Widget
  *
@@ -38,13 +40,19 @@ public class AppWidgetSmall extends AppWidgetBase {
 
     public static final String CMDAPPWIDGETUPDATE = "app_widget_small_update";
 
-    private static AppWidgetSmall mInstance;
+    private static WeakReference<AppWidgetSmall> sInstance;
 
     public static synchronized AppWidgetSmall getInstance() {
-        if (mInstance == null) {
-            mInstance = new AppWidgetSmall();
+        if (sInstance != null) {
+            AppWidgetSmall ref = sInstance.get();
+            if (ref != null) {
+                return ref;
+            }
         }
-        return mInstance;
+
+        AppWidgetSmall ref = new AppWidgetSmall();
+        sInstance = new WeakReference<AppWidgetSmall>(ref);
+        return ref;
     }
 
     /**

@@ -24,6 +24,7 @@ android {
         debug {
             shrinkResources false
             minifyEnabled false
+            debuggable true
             jniDebuggable = true
         }
     }

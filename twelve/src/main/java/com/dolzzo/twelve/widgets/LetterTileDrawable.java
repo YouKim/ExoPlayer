@@ -28,6 +28,7 @@ import android.graphics.Paint.Align;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 
 import com.dolzzo.twelve.R;
@@ -80,15 +81,15 @@ public class LetterTileDrawable extends Drawable {
         mPaint.setDither(true);
         res = context.getResources();
 
-        initializeStaticVariables(res);
+        initializeStaticVariables(res, context);
     }
 
-    private static synchronized void initializeStaticVariables(final Resources res) {
+    private static synchronized void initializeStaticVariables(final Resources res, final Context context) {
         if (sColors == null) {
             sColors = res.obtainTypedArray(R.array.letter_tile_colors);
             sVibrantDarkColors = res.obtainTypedArray(R.array.letter_tile_vibrant_dark_colors);
-            sDefaultColor = res.getColor(R.color.letter_tile_default_color);
-            sTileFontColor = res.getColor(R.color.letter_tile_font_color);
+            sDefaultColor = ContextCompat.getColor(context, R.color.letter_tile_default_color);
+            sTileFontColor =  ContextCompat.getColor(context, R.color.letter_tile_font_color);
             sLetterToTileRatio = res.getFraction(R.dimen.letter_to_tile_ratio, 1, 1);
             DEFAULT_ARTIST = BitmapFactory.decodeResource(res, R.drawable.ic_artist);
             DEFAULT_ARTIST_LARGE = BitmapFactory.decodeResource(res, R.drawable.ic_artist_lg);
@@ -202,7 +203,7 @@ public class LetterTileDrawable extends Drawable {
      */
     public static BitmapWithColors createDefaultBitmap(Context context, String identifier,
                                                        ImageType type, boolean isCircle, boolean smallArtwork) {
-        initializeStaticVariables(context.getResources());
+        initializeStaticVariables(context.getResources(), context);
 
         identifier = MusicUtils.getTrimmedName(identifier);
 

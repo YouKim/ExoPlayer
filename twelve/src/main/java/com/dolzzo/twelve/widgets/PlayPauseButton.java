@@ -16,6 +16,7 @@ package com.dolzzo.twelve.widgets;
 import android.animation.Animator;
 import android.content.Context;
 import android.os.Build;
+import android.support.v7.widget.AppCompatImageView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
@@ -33,7 +34,7 @@ import com.dolzzo.twelve.utils.MusicUtils;
  *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class PlayPauseButton extends ImageButton implements OnClickListener, OnLongClickListener {
+public class PlayPauseButton extends AppCompatImageView implements OnClickListener, OnLongClickListener {
 
     /**
      * Play button theme resource

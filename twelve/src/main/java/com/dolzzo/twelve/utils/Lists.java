@@ -35,7 +35,7 @@ public final class Lists {
      *
      * @return a newly-created, initially-empty {@code ArrayList}
      */
-    public static final <E> ArrayList<E> newArrayList() {
+    public static <E> ArrayList<E> newArrayList() {
         return new ArrayList<E>();
     }
 
@@ -47,7 +47,7 @@ public final class Lists {
      *
      * @return a newly-created, initially-empty {@code LinkedList}
      */
-    public static final <E> LinkedList<E> newLinkedList() {
+    public static <E> LinkedList<E> newLinkedList() {
         return new LinkedList<E>();
     }
 

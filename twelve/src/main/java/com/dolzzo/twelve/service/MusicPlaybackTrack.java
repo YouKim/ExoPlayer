@@ -91,14 +91,10 @@ public class MusicPlaybackTrack implements Parcelable {
         if (o instanceof MusicPlaybackTrack) {
             MusicPlaybackTrack other = (MusicPlaybackTrack) o;
             if (other != null) {
-                if (mId == other.mId
+                return (mId == other.mId
                         && mSourceId == other.mSourceId
                         && mSourceType == other.mSourceType
-                        && mSourcePosition == other.mSourcePosition) {
-                    return true;
-                }
-
-                return false;
+                        && mSourcePosition == other.mSourcePosition);
             }
         }
 

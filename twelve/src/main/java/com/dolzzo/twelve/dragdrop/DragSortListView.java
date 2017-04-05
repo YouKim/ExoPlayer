@@ -18,6 +18,7 @@ import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.os.SystemClock;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -331,8 +332,7 @@ public class DragSortListView extends ListView {
                 DragSortController.ON_DOWN, DragSortController.FLING_RIGHT_REMOVE);
         mController.setRemoveEnabled(true);
         mController.setSortEnabled(true);
-        mController
-                .setBackgroundColor(getResources().getColor(R.color.accent));
+        mController.setBackgroundColor(ContextCompat.getColor(context, R.color.accent));
 
         mFloatViewManager = mController;
         setOnTouchListener(mController);
@@ -601,7 +601,7 @@ public class DragSortListView extends ListView {
      *
      * @param position
      * @param top
-     * @param height   Height of item at position. If -1, this function calculates
+     * @param heights   Height of item at position. If -1, this function calculates
      *                 this height.
      * @return Shuffle line between position-1 and position (for the given view
      * of the list; that is, for when top of item at position has

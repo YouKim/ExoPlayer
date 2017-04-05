@@ -23,6 +23,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Interpolator;
 
+import java.lang.ref.WeakReference;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -33,7 +34,7 @@ import java.util.Iterator;
 public class SongPlayCount {
     // how many weeks worth of playback to track
     private static final int NUM_WEEKS = 52;
-    private static SongPlayCount sInstance = null;
+    private static WeakReference<SongPlayCount> sInstance = null;
     // interpolator curve applied for measuring the curve
     private static Interpolator sInterpolator = new AccelerateInterpolator(1.5f);
     // how high to multiply the interpolation curve
@@ -67,11 +68,17 @@ public class SongPlayCount {
      * @param context The {@link android.content.Context} to use
      * @return A new instance of this class.
      */
-    public static final synchronized SongPlayCount getInstance(final Context context) {
-        if (sInstance == null) {
-            sInstance = new SongPlayCount(context.getApplicationContext());
+    public static synchronized SongPlayCount getInstance(final Context context) {
+        if (sInstance != null) {
+            SongPlayCount ref = sInstance.get();
+            if (ref != null) {
+                return ref;
+            }
         }
-        return sInstance;
+
+        SongPlayCount ref = new SongPlayCount(context.getApplicationContext());
+        sInstance = new WeakReference<SongPlayCount>(ref);
+        return ref;
     }
 
     /**

@@ -18,11 +18,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.lang.ref.WeakReference;
+
 public class RecentStore {
     /* Maximum # of items in the db */
     private static final int MAX_ITEMS_IN_DB = 100;
 
-    private static RecentStore sInstance = null;
+    private static WeakReference<RecentStore> sInstance = null;
 
     private MusicDB mMusicDatabase = null;
 
@@ -39,11 +41,17 @@ public class RecentStore {
      * @param context The {@link Context} to use
      * @return A new instance of this class.
      */
-    public static final synchronized RecentStore getInstance(final Context context) {
-        if (sInstance == null) {
-            sInstance = new RecentStore(context.getApplicationContext());
+    public static synchronized RecentStore getInstance(final Context context) {
+        if (sInstance != null) {
+            RecentStore ref = sInstance.get();
+            if (ref != null) {
+                return ref;
+            }
         }
-        return sInstance;
+
+        RecentStore ref = new RecentStore(context.getApplicationContext());
+        sInstance = new WeakReference<RecentStore>(ref);
+        return ref;
     }
 
     public void onCreate(final SQLiteDatabase db) {

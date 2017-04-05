@@ -60,7 +60,7 @@ public class ArtistLoader extends SectionCreator.SimpleListLoader<Artist> {
      * @param context The {@link Context} to use.
      * @return The {@link Cursor} used to run the artist query.
      */
-    public static final Cursor makeArtistCursor(final Context context) {
+    public static Cursor makeArtistCursor(final Context context) {
         if (MusicUtils.isPermissionGranted(context)  == false) {
             return null;
         }
@@ -68,7 +68,7 @@ public class ArtistLoader extends SectionCreator.SimpleListLoader<Artist> {
         // requested artist ordering
         final String artistSortOrder = PreferenceUtils.getInstance(context).getArtistSortOrder();
 
-        Cursor cursor = context.getContentResolver().query(Artists.EXTERNAL_CONTENT_URI,
+        return context.getContentResolver().query(Artists.EXTERNAL_CONTENT_URI,
                 new String[]{
                         /* 0 */
                         Artists._ID,
@@ -79,8 +79,6 @@ public class ArtistLoader extends SectionCreator.SimpleListLoader<Artist> {
                         /* 3 */
                         Artists.NUMBER_OF_TRACKS
                 }, null, null, artistSortOrder);
-
-        return cursor;
     }
 
     /**

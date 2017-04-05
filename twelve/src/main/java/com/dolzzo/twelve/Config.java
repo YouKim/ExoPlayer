@@ -67,7 +67,7 @@ public final class Config {
     public Config() {
     }
 
-    public static enum SmartPlaylistType {
+    public enum SmartPlaylistType {
         LastAdded(-1, R.string.playlist_last_added),
         RecentlyPlayed(-2, R.string.playlist_recently_played),
         TopTracks(-3, R.string.playlist_top_tracks);
@@ -95,7 +95,7 @@ public final class Config {
      * This helps identify where an id has come from.  Mainly used to determine when a user
      * clicks a song where that song came from (artist/album/playlist)
      */
-    public static enum IdType {
+    public enum IdType {
         NA(0),
         Artist(1),
         Album(2),

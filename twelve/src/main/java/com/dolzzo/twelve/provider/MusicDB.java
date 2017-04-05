@@ -20,6 +20,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.lang.ref.WeakReference;
+
 public class MusicDB extends SQLiteOpenHelper {
     /* Name of database file */
     public static final String DATABASENAME = "musicdb.db";
@@ -38,7 +40,7 @@ public class MusicDB extends SQLiteOpenHelper {
 
     /* Version constant to increment when the database should be rebuilt */
     private static final int VERSION = 4;
-    private static MusicDB sInstance = null;
+    private static WeakReference<MusicDB> sInstance = null;
 
     private final Context mContext;
 
@@ -52,11 +54,17 @@ public class MusicDB extends SQLiteOpenHelper {
      * @param context The {@link android.content.Context} to use
      * @return A new instance of this class.
      */
-    public static final synchronized MusicDB getInstance(final Context context) {
-        if (sInstance == null) {
-            sInstance = new MusicDB(context.getApplicationContext());
+    public static synchronized MusicDB getInstance(final Context context) {
+        if (sInstance != null) {
+            MusicDB ref = sInstance.get();
+            if (ref != null) {
+                return ref;
+            }
         }
-        return sInstance;
+
+        MusicDB ref = new MusicDB(context.getApplicationContext());
+        sInstance = new WeakReference<MusicDB>(ref);
+        return ref;
     }
 
     @Override

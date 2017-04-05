@@ -27,6 +27,7 @@ import android.os.IBinder;
 import android.provider.BaseColumns;
 import android.provider.MediaStore;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.Loader;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -47,7 +48,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.dolzzo.twelve.Config;
-import com.dolzzo.twelve.IElevenService;
+import com.dolzzo.twelve.ITwelveService;
 import com.dolzzo.twelve.R;
 import com.dolzzo.twelve.adapters.SummarySearchAdapter;
 import com.dolzzo.twelve.loaders.WrappedAsyncTaskLoader;
@@ -295,7 +296,7 @@ public class SearchActivity extends AppCompatActivity implements
             }
         }
 
-        final int actionBarColor = getResources().getColor(R.color.header_action_bar_color);
+        final int actionBarColor =  ContextCompat.getColor(this, R.color.header_action_bar_color);
         ColorDrawable mActionBarBackground = new ColorDrawable(actionBarColor);
         mToolBar.setBackgroundDrawable(mActionBarBackground);
 
@@ -677,7 +678,7 @@ public class SearchActivity extends AppCompatActivity implements
      */
     @Override
     public void onServiceConnected(final ComponentName name, final IBinder service) {
-        mService = IElevenService.Stub.asInterface(service);
+        mService = ITwelveService.Stub.asInterface(service);
     }
 
     /**

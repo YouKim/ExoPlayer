@@ -177,7 +177,7 @@ public abstract class SlidingPanelActivity extends BaseActivity {
      * {@inheritDoc}
      */
     @Override
-    public int setContentView() {
+    public int getContentView() {
         return R.layout.activity_base;
     }
 

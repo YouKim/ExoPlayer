@@ -28,6 +28,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
@@ -38,7 +39,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dolzzo.twelve.IElevenService;
+import com.dolzzo.twelve.ITwelveService;
 import com.dolzzo.twelve.MusicPlaybackService;
 import com.dolzzo.twelve.MusicStateListener;
 import com.dolzzo.twelve.R;
@@ -152,7 +153,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ServiceC
         }
 
         // Set the layout
-        setContentView(setContentView());
+        setContentView(getContentView());
 
         getActionBarToolbar();
 
@@ -160,7 +161,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ServiceC
 
         // set the background on the root view
         getWindow().getDecorView().getRootView().setBackgroundColor(
-                getResources().getColor(R.color.background_color));
+                ContextCompat.getColor(this, R.color.background_color));
         // Initialze the bottom action bar
         initBottomActionBar();
 
@@ -198,7 +199,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ServiceC
      */
     @Override
     public void onServiceConnected(final ComponentName name, final IBinder service) {
-        mService = IElevenService.Stub.asInterface(service);
+        mService = ITwelveService.Stub.asInterface(service);
         // Set the playback drawables
         updatePlaybackControls();
         // Current info
@@ -337,7 +338,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ServiceC
         setActionBarTitle(title);
 
         if (mActionBarBackground == null) {
-            final int actionBarColor = getResources().getColor(R.color.header_action_bar_color);
+            final int actionBarColor = ContextCompat.getColor(this, R.color.header_action_bar_color);
             mActionBarBackground = new ColorDrawable(actionBarColor);
             mToolBar.setBackgroundDrawable(mActionBarBackground);
         }
@@ -469,7 +470,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ServiceC
     /**
      * @return The resource ID to be inflated.
      */
-    public abstract int setContentView();
+    public abstract int getContentView();
 
     /**
      * handle pending playback requests
