@@ -21,6 +21,7 @@ import android.os.Message;
 import android.util.Log;
 
 import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.TwelvePlayer;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public abstract class SrtManager implements Handler.Callback {
 
     private Runnable mLoader;
 
-    private SimpleExoPlayer mMediaPlayer;
+    private TwelvePlayer mMediaPlayer;
     private int mNextIndex;
 
     public SrtManager() {
@@ -75,7 +76,7 @@ public abstract class SrtManager implements Handler.Callback {
         }
     }
 
-    public synchronized void initialize(final SimpleExoPlayer player, final File f) {
+    public synchronized void initialize(final TwelvePlayer player, final File f) {
         if (player == null || f == null) {
             throw new IllegalArgumentException("Must have a valid player and file");
         }

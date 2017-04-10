@@ -77,6 +77,7 @@ import com.google.android.exoplayer2.LoadControl;
 import com.google.android.exoplayer2.PlaybackParameters;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.Timeline;
+import com.google.android.exoplayer2.TwelvePlayer;
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
 import com.google.android.exoplayer2.extractor.ExtractorsFactory;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;
@@ -2978,9 +2979,11 @@ public class MusicPlaybackService extends Service {
         private SrtManager mSrtManager;
         private Handler mHandler;
 
-        private SimpleExoPlayer mCurrentMediaPlayer;
+        private TwelvePlayer mCurrentMediaPlayer;
         private String mNextMediaPath;
         private boolean mIsInitailized;
+
+        public static final long DEFAULT_ALLOWED_VIDEO_JOINING_TIME_MS = 5000;
 
         public MultiPlayer2(final MusicPlaybackService service) {
 
@@ -3014,7 +3017,9 @@ public class MusicPlaybackService extends Service {
             LoadControl loadControl = new DefaultLoadControl();
             // 3. Create the player
             mCurrentMediaPlayer =
-                    ExoPlayerFactory.newSimpleInstance(context, trackSelector, loadControl);
+                    new TwelvePlayer(context, trackSelector, loadControl, null,
+                            TwelvePlayer.EXTENSION_RENDERER_MODE_OFF, DEFAULT_ALLOWED_VIDEO_JOINING_TIME_MS);
+
             mCurrentMediaPlayer.addListener(this);
         }
 
@@ -3201,7 +3206,9 @@ public class MusicPlaybackService extends Service {
         }
 
         public int getAudioSessionId() {
-            return 0;
+            int id = mCurrentMediaPlayer.getAudioSessionId();
+            if (D) Log.d(TAG, "getAudioSessionId = " + id);
+            return id;
         }
 
         @Override

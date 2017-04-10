@@ -147,7 +147,7 @@ public class TwelvePlayer implements ExoPlayer {
     private int audioStreamType;
     private float audioVolume;
 
-    protected TwelvePlayer(Context context, TrackSelector trackSelector, LoadControl loadControl,
+    public TwelvePlayer(Context context, TrackSelector trackSelector, LoadControl loadControl,
                               DrmSessionManager<FrameworkMediaCrypto> drmSessionManager,
                               @ExtensionRendererMode int extensionRendererMode, long allowedVideoJoiningTimeMs) {
         mainHandler = new Handler();

@@ -15,7 +15,6 @@
   limitations under the License.
 -->
 <com.dolzzo.twelve.slidinguppanel.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/tools"
     xmlns:sothree="http://schemas.android.com/apk/res-auto"
     android:id="@+id/sliding_layout"
     android:layout_width="match_parent"
@@ -36,8 +35,8 @@
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
             android:theme="@style/ToolBarTheme"
-            app:elevation="@dimen/action_bar_elevation"
-            app:popupTheme="@style/ToolBarPopupTheme" />
+            android:elevation="@dimen/action_bar_elevation"
+            android:popupTheme="@style/ToolBarPopupTheme" />
 
         <FrameLayout
             android:id="@+id/activity_base_content"
